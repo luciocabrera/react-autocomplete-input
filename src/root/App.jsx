@@ -1,5 +1,15 @@
 import { AppStyled } from './App.styled';
-import AutoCompleteDisconnected from '../components/AutoComplete/AutoCompleteDisconnected/AutoCompleteDisconnected';
+import { lazy } from 'react';
+const AutoCompleteDisconnected = lazy(() =>
+  import(
+    '../components/AutoComplete/AutoCompleteDisconnected/AutoCompleteDisconnected'
+  )
+);
+const AutoCompleteConnected = lazy(() =>
+  import(
+    '../components/AutoComplete/AutoCompleteConnected/AutoCompleteConnected'
+  )
+);
 
 const App = () => (
   <AppStyled>
@@ -26,6 +36,11 @@ const App = () => (
         'Yarn',
         'Npm'
       ]}
+    />
+    <AutoCompleteConnected
+      getFetchUrl={searchText =>
+        `https://api.datamuse.com/words?sp=*${searchText}*`
+      }
     />
   </AppStyled>
 );
